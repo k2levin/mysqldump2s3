@@ -18,6 +18,7 @@ class Mysql
 
     public function dump()
     {
+        ini_set('memory_limit', '-1');
         exec('mkdir '.$this->storage_path);
         $all_sql_file = $this->db_envs['DATABASE'].'_'.date("dMY_His").'.sql';
         try {
@@ -31,6 +32,7 @@ class Mysql
         } catch (Exception $e) {
             echo $e->getMessage()."\n";
         }
+        ini_set('memory_limit', '128M');
     }
 
     private function dumpTable($host, $user, $password, $database, $table)
