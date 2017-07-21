@@ -6,5 +6,7 @@ services:
       - MYSQL_ROOT_PASSWORD=supersecret
   app:
     image:        k2levin/php-laravel:misc
+    environment:
+      - TZ=Asia/Singapore
     volumes:
       - "$PWD/:/var/www/app/mysqldump2s3/"
