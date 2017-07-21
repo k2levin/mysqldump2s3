@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit backupGlobals="false"
+         backupStaticAttributes="false"
+         bootstrap="vendor/autoload.php"
+         colors="true"
+         convertErrorsToExceptions="true"
+         convertNoticesToExceptions="true"
+         convertWarningsToExceptions="true"
+         processIsolation="false"
+         stopOnFailure="false">
+    <testsuites>
+        <testsuite name="Tests">
+            <directory suffix="Test.php">./tests</directory>
+        </testsuite>
+    </testsuites>
+    <php>
+        <env name="ENV" value="testing" />
+
+        <env name="DB_1_HOST" value="db" />
+        <env name="DB_1_USER" value="root" />
+        <env name="DB_1_PASSWORD" value="supersecret" />
+        <env name="DB_1_DATABASE" value="mysqldump2s3-test" />
+        <env name="DB_1_IGNORE_TABLE1" value="users1" />
+        <env name="DB_1_IGNORE_TABLE2" value="users3" />
+
+        <env name="DB_2_HOST" value="db" />
+        <env name="DB_2_USER" value="root" />
+        <env name="DB_2_PASSWORD" value="supersecret" />
+        <env name="DB_2_DATABASE" value="mysqldump2s3-test2" />
+        <env name="DB_2_IGNORE_TABLE1" value="users2" />
+
+        <env name="S3_KEY" value="key123" />
+        <env name="S3_SECRET" value="secret123" />
+        <env name="S3_VERSION" value="latest" />
+        <env name="S3_REGION" value="ap-southeast-1" />
+        <env name="S3_BUCKET" value="bucket123" />
+    </php>
+</phpunit>

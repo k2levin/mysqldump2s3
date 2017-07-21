@@ -1,0 +1,24 @@
+{
+    "name": "k2levin/mysqldump2s3",
+    "description": "Run mysqldump and upload the file to AWS S3",
+    "type": "project",
+    "require": {
+        "aws/aws-sdk-php": "^3.31"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^6.2"
+    },
+    "license": "MIT License",
+    "authors": [
+        {
+            "name": "Kevin Khew",
+            "email": "k2leving@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Lib\\": "Lib/"
+        }
+    },
+    "minimum-stability": "stable"
+}

@@ -1,0 +1,12 @@
+version:          "3"
+services:
+  db:
+    image:        mysql:latest
+    environment:
+      - MYSQL_ROOT_PASSWORD=supersecret
+    ports:
+      - "3306:3306"
+  app:
+    image:        k2levin/php-laravel:misc
+    volumes:
+      - "$PWD/:/var/www/app/mysqldump2s3/"

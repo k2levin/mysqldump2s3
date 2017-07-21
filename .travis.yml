@@ -1,0 +1,30 @@
+sudo: required
+
+services:
+  - docker
+
+env:
+  - FOLDER_PATH: /var/www/app/mysqldump2s3
+
+before_install:
+  - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+  - sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+  - sudo apt-get update
+  - sudo apt-get -y install docker-ce
+  - docker info
+  - docker swarm init
+  - docker stack deploy -c docker-compose.yml local
+  - sleep 60
+  - docker stack ps local
+  - docker ps -a
+
+install:
+  - docker exec -it $(docker ps -f name=app -q) sh -c "cd ${FOLDER_PATH} && composer install"
+
+script:
+  - docker exec -it $(docker ps -f name=app -q) sh -c "cd ${FOLDER_PATH} && vendor/bin/phpunit"
+
+notifications:
+  email:
+    recipients:
+      - k2leving@gmail.com
