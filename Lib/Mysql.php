@@ -36,7 +36,7 @@ class Mysql
     private function dumpTable($host, $user, $password, $database, $table)
     {
         $sql_file_path = $this->storage_path.$database.'_'.$table.'.sql';
-        exec("mysqldump -h $host -u root -p$password $database $table > $sql_file_path");
+        exec("mysqldump -h $host -u $user -p$password $database $table > $sql_file_path");
 
         return basename($sql_file_path);
     }

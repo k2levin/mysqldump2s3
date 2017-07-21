@@ -10,8 +10,7 @@
 - Copy `.env.example` to `.env`
 - Put database & S3 credentials into `.env`
 - Folder `storage` need to have write access by system
-- Run `composer install`
+- Run `composer install --no-dev --optimize-autoloader`
 
 ### How to run
 - create **cron job** to run `php` at `./public/index.php`
-
