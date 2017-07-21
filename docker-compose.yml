@@ -4,8 +4,6 @@ services:
     image:        mysql:latest
     environment:
       - MYSQL_ROOT_PASSWORD=supersecret
-    ports:
-      - "3306:3306"
   app:
     image:        k2levin/php-laravel:misc
     volumes:
