@@ -13,7 +13,7 @@ before_install:
   - sudo apt-get -y install docker-ce
   - docker info
   - docker swarm init
-  - docker stack deploy -c docker-compose.yml local
+  - docker stack deploy -c example-docker-compose.yml local
   - sleep 60
   - docker stack ps local
   - docker ps -a
