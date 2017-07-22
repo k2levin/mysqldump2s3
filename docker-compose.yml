@@ -6,6 +6,11 @@ services:
       - MYSQL_ROOT_PASSWORD=supersecret
   app:
     image:        k2levin/php-laravel:misc
+    deploy:
+      resources:
+        limits:
+          cpus: '0.8'
+          memory: 5G
     environment:
       - TZ=Asia/Singapore
     volumes:
