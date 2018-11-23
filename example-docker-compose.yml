@@ -5,7 +5,7 @@ services:
     environment:
       - MYSQL_ROOT_PASSWORD=supersecret
   app:
-    image:        k2levin/php-laravel:misc
+    image:        k2levin/php-laravel:latest
     deploy:
       resources:
         limits:
