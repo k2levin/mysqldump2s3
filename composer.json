@@ -3,10 +3,10 @@
     "description": "Run mysqldump and upload the file to AWS S3",
     "type": "project",
     "require": {
-        "aws/aws-sdk-php": "^3.31"
+        "aws/aws-sdk-php": "^3.90"
     },
     "require-dev": {
-        "phpunit/phpunit": "^6.2"
+        "phpunit/phpunit": "^7.5"
     },
     "license": "MIT License",
     "authors": [
