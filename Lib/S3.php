@@ -9,26 +9,26 @@ use Aws\S3\S3Client;
 class S3
 {
     protected $file;
-    protected $envs;
+    protected $s3_envs;
 
-    public function __construct(String $file)
+    public function __construct(String $file, Array $s3_envs)
     {
         $this->file = $file;
         $env = new Env;
-        $this->envs = $env->getEnvs()['S3'];
+        $this->s3_envs = $s3_envs;
     }
 
     public function upload()
     {
         try {
             $s3 = new S3Client([
-                'version'     => $this->envs['S3_VERSION'],
-                'region'      => $this->envs['S3_REGION'],
+                'version'     => $this->s3_envs['version'],
+                'region'      => $this->s3_envs['region'],
                 'credentials' => $this->getS3Credentials(),
             ]);
 
             $s3->putObject([
-                'Bucket'     => $this->envs['S3_BUCKET'],
+                'Bucket'     => $this->s3_envs['bucket'],
                 'Key'        => $this->file,
                 'SourceFile' => __DIR__.'/../storage/'.$this->file,
             ]);
@@ -36,18 +36,20 @@ class S3
             echo 'Upload success!! '.$this->file."\n";
         } catch (S3Exception $e) {
             echo $e->getMessage()."\n";
+            die();
         } catch (AwsException $e) {
             echo $e->getAwsRequestId()."\n";
             echo $e->getAwsErrorType()."\n";
             echo $e->getAwsErrorCode()."\n";
+            die();
         }
     }
 
     private function getS3Credentials()
     {
         $credentials = [
-            'key'    => $this->envs['S3_KEY'],
-            'secret' => $this->envs['S3_SECRET'],
+            'key'    => $this->s3_envs['key'],
+            'secret' => $this->s3_envs['secret'],
         ];
 
         return $credentials;

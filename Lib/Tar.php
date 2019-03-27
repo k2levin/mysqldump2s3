@@ -19,6 +19,7 @@ class Tar
             return $this->file;
         } catch (Exception $e) {
             echo $e->getMessage()."\n";
+            die();
         }
     }
 

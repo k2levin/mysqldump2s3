@@ -3,7 +3,8 @@
     "description": "Run mysqldump and upload the file to AWS S3",
     "type": "project",
     "require": {
-        "aws/aws-sdk-php": "^3.90"
+        "aws/aws-sdk-php": "^3.90",
+        "symfony/yaml": "^4.2"
     },
     "require-dev": {
         "phpunit/phpunit": "^7.5"

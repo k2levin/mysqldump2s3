@@ -10,8 +10,7 @@ class EnvTest extends TestCase
         $env = new Env();
         $envs = $env->getEnvs();
 
-        $this->assertArrayHasKey('S3', $envs);
-        $this->assertArrayHasKey('DB_1', $envs);
-        $this->assertArrayHasKey('DB_2', $envs);
+        $this->assertArrayHasKey('s3', $envs);
+        $this->assertArrayHasKey('databases', $envs);
     }
 }

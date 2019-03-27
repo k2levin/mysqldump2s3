@@ -20,10 +20,10 @@ class Mysql
     {
         ini_set('memory_limit', '-1');
         exec('mkdir '.$this->storage_path);
-        $all_sql_file = $this->db_envs['DATABASE'].'_'.date("dMY_His").'.sql';
+        $all_sql_file = $this->db_envs['database'].'_'.date("dMY_His").'.sql';
         try {
             foreach ($this->getTables() as $table) {
-                $sql_file = $this->dumpTable($this->db_envs['HOST'], $this->db_envs['USER'], $this->db_envs['PASSWORD'], $this->db_envs['DATABASE'], $table);
+                $sql_file = $this->dumpTable($this->db_envs['host'], $this->db_envs['user'], $this->db_envs['password'], $this->db_envs['database'], $table);
                 file_put_contents($this->storage_path.$all_sql_file, file_get_contents($this->storage_path.$sql_file)."\n", FILE_APPEND | LOCK_EX);
                 exec('rm -f '.$this->storage_path.$sql_file);
             }
@@ -31,6 +31,7 @@ class Mysql
             return $all_sql_file;
         } catch (Exception $e) {
             echo $e->getMessage()."\n";
+            die();
         }
         ini_set('memory_limit', '128M');
     }
@@ -43,37 +44,24 @@ class Mysql
         return basename($sql_file_path);
     }
 
-    private function getIgnoreTables()
-    {
-        $result = array_filter(
-            $this->db_envs,
-            function ($key) {
-                $search = 'IGNORE_TABLE';
-                return preg_match("/$search/", $key);
-            },
-            ARRAY_FILTER_USE_KEY
-        );
-
-        return $result;
-    }
-
     private function getTables()
     {
         try {
-            $host = $this->db_envs['HOST'];
-            $database = $this->db_envs['DATABASE'];
-            $pdo = new PDO("mysql:host=$host;dbname=$database", $this->db_envs['USER'], $this->db_envs['PASSWORD']);
+            $host = $this->db_envs['host'];
+            $database = $this->db_envs['database'];
+            $pdo = new PDO("mysql:host=$host;dbname=$database", $this->db_envs['user'], $this->db_envs['password']);
             $query = $pdo->query("SHOW TABLES;");
             $results = $query->fetchAll(PDO::FETCH_COLUMN);
 
             $filter_results = array_filter(
                 $results,
                 function ($var) {
-                    return !in_array($var, $this->getIgnoreTables());
+                    return !in_array($var, $this->db_envs['ignore_table']);
                 }
             );
         } catch (PDOException $e) {
             echo $e->getMessage()."\n";
+            die();
         }
 
         return $filter_results;

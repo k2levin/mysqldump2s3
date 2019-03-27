@@ -9,15 +9,8 @@ class App
         // find out how many databases
         $env = new Env;
         $envs = $env->getEnvs();
-        $dbs = [];
-        foreach ($envs as $key => $env) {
-            if ($key === 'S3' || empty($env)) {
-                continue;
-            }
-            $dbs[$key] = $env;
-        }
 
-        foreach ($dbs as $db_envs) {
+        foreach ($envs['databases'] as $db_envs) {
             // backup mysql database
             $mysql = new Mysql($db_envs);
             $sql_file = $mysql->dump();
@@ -27,7 +20,7 @@ class App
             $tar_file = $tar->compress();
 
             // upload the file to S3
-            $s3 = new S3($tar_file);
+            $s3 = new S3($tar_file, $envs['s3']);
             $s3->upload();
 
             // cleanup
