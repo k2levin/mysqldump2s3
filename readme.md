@@ -7,7 +7,7 @@
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/k2levin/mysqldump2s3/master/LICENSE)
 
 ### How to install
-- Copy `.env.example` to `.env`
+- Copy `env.yaml.example` to `env.yaml`
 - Put database & S3 credentials into `.env`
 - Folder `storage` need to have write access by system
 - Run `composer install --no-dev --optimize-autoloader`
