@@ -11,7 +11,7 @@ class Env
 
     public function __construct()
     {
-        $this->file_path = 'env.yaml';
+        $this->file_path = __DIR__.'/../env.yaml';
     }
 
     /**
